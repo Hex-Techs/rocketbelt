@@ -1,0 +1,16 @@
+domain: hextech.com
+layout:
+- go.kubebuilder.io/v3
+projectName: rocketbelt
+repo: github.com/hex-techs/rocketbelt
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: hextech.com
+  group: rocketbelt
+  kind: User
+  path: github.com/hex-techs/rocketbelt/api/v1alpha1
+  version: v1alpha1
+version: "3"
