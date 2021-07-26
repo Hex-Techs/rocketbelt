@@ -19,6 +19,11 @@ package controllers
 import (
 	"context"
 
+<<<<<<< HEAD
+	"k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+=======
+>>>>>>> 545ed5ba5625a4569630c039b5a6efd00a15c807
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -49,7 +54,43 @@ type UserReconciler struct {
 func (r *UserReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
+<<<<<<< HEAD
+	user := &rocketbeltv1alpha1.User{}
+	err := r.Client.Get(ctx, req.NamespacedName, user)
+	if err != nil {
+		if errors.IsNotFound(err) {
+			return ctrl.Result{}, nil
+		}
+		log.Log.Error(err, "Failed to get User")
+		return ctrl.Result{}, err
+	}
+
+	log.Log.Info("Reconciling User")
+
+	if user.DeletionTimestamp != nil {
+		return ctrl.Result{}, nil
+	}
+
+	if user.DeletionTimestamp.IsZero() && user.Status.State == rocketbeltv1alpha1.UserNull {
+		user.Status.State = rocketbeltv1alpha1.UserActive
+	}
+	if user.Spec.ChangePassword {
+		now := metav1.Now()
+		user.Status.LastChangePasswordTimestamp = &now
+		// change the password and turn it off
+		user.Spec.ChangePassword = false
+	}
+	err = r.Client.Update(ctx, user)
+	if err != nil {
+		return ctrl.Result{}, err
+	}
+	err = r.Client.Status().Update(ctx, user)
+	if err != nil {
+		return ctrl.Result{}, err
+	}
+=======
 	// your logic here
+>>>>>>> 545ed5ba5625a4569630c039b5a6efd00a15c807
 
 	return ctrl.Result{}, nil
 }

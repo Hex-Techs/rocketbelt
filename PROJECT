@@ -13,4 +13,11 @@ resources:
   kind: User
   path: github.com/hex-techs/rocketbelt/api/v1alpha1
   version: v1alpha1
+<<<<<<< HEAD
+  webhooks:
+    defaulting: true
+    validation: true
+    webhookVersion: v1
+=======
+>>>>>>> 545ed5ba5625a4569630c039b5a6efd00a15c807
 version: "3"

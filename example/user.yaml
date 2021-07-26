@@ -1,0 +1,10 @@
+apiVersion: rocketbelt.hextech.com/v1alpha1
+kind: User
+metadata:
+  name: test
+spec:
+  displayName: malzahar
+  email: test@tencent.com
+  phone: "11111111111"
+  password: "123456"
+  # changePassword: true

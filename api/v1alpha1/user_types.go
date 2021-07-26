@@ -20,22 +20,68 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+<<<<<<< HEAD
+// +kubebuilder:validation:Required
+
+type UserState string
+
+const (
+	// the user is active
+	UserActive UserState = "Active"
+	// the user is disabled
+	UserDisabled UserState = "Disabled"
+	// the user is null, unknow
+	UserNull UserState = ""
+)
+=======
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+>>>>>>> 545ed5ba5625a4569630c039b5a6efd00a15c807
 
 // UserSpec defines the desired state of User
 type UserSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+<<<<<<< HEAD
+	// +optional
+	DisplayName string `json:"displayName"`
+
+	// +optional
+	Password string `json:"password"`
+
+	// +kubebuilder:validation:Pattern=`^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$`
+	// +optional
+	Email string `json:"email"`
+
+	// +kubebuilder:validation:Pattern=`[0-9]{11}`
+	// +optional
+	Phone string `json:"phone,omitempty"`
+
+	// +optional
+	IM string `json:"im,omitempty"`
+
+	// +optional
+	// +kubebuilder:validation:Default=true
+	ChangePassword bool `json:"changePassword,omitempty"`
+=======
 
 	// Foo is an example field of User. Edit user_types.go to remove/update
 	Foo string `json:"foo,omitempty"`
+>>>>>>> 545ed5ba5625a4569630c039b5a6efd00a15c807
 }
 
 // UserStatus defines the observed state of User
 type UserStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+<<<<<<< HEAD
+	// +optional
+	State UserState `json:"state,omitempty"`
+
+	// +optional
+	LastChangePasswordTimestamp *metav1.Time `json:"lastChangePasswordTimestamp,omitempty"`
+=======
+>>>>>>> 545ed5ba5625a4569630c039b5a6efd00a15c807
 }
 
 //+kubebuilder:object:root=true
