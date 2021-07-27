@@ -1,0 +1,25 @@
+apiVersion: rocketbelt.hextech.com/v1alpha1
+kind: HexRole
+metadata:
+  name: test
+spec:
+  rules:
+  - resources:
+    - user
+    - role
+    verbs:
+    - get
+    - list
+
+---
+
+apiVersion: rocketbelt.hextech.com/v1alpha1
+kind: HexRoleBinding
+metadata:
+  name: test
+spec:
+  roleRef:
+    name: test
+  users:
+  - username1
+  - username2

@@ -77,7 +77,6 @@ func main() {
 		setupLog.Error(err, "unable to start manager")
 		os.Exit(1)
 	}
-
 	if err = (&controllers.UserReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
@@ -85,20 +84,31 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "User")
 		os.Exit(1)
 	}
-	if err = (&controllers.UserReconciler{
+	// control the webhook service
+	if os.Getenv("ENABLE_WEBHOOKS") != "false" {
+		if err = (&rocketbeltv1alpha1.User{}).SetupWebhookWithManager(mgr); err != nil {
+			setupLog.Error(err, "unable to create webhook", "webhook", "User")
+			os.Exit(1)
+		}
+	}
+	if err = (&controllers.HexRoleReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "User")
+		setupLog.Error(err, "unable to create controller", "controller", "HexRole")
 		os.Exit(1)
 	}
-<<<<<<< HEAD
-	if err = (&rocketbeltv1alpha1.User{}).SetupWebhookWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create webhook", "webhook", "User")
+	if err = (&controllers.HexRoleBindingReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "HexRoleBinding")
 		os.Exit(1)
 	}
-=======
->>>>>>> 545ed5ba5625a4569630c039b5a6efd00a15c807
+	if err = (&rocketbeltv1alpha1.HexRole{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "HexRole")
+		os.Exit(1)
+	}
 	//+kubebuilder:scaffold:builder
 
 	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {

@@ -46,15 +46,9 @@ var _ webhook.Defaulter = &User{}
 // Default implements webhook.Defaulter so a webhook will be registered for the type
 func (r *User) Default() {
 	userlog.Info("default", "name", r.Name)
-
-	if r.Status.State == "" {
-		r.Status.State = UserActive
-	}
 	if r.Spec.Password != "" {
-		if r.Spec.ChangePassword {
-			r.Spec.Password = fmt.Sprintf("%x",
-				pbkdf2.Key([]byte(r.Spec.Password), []byte("rocketbelt"), 4096, 32, sha1.New))
-		}
+		r.Spec.Password = fmt.Sprintf("%x",
+			pbkdf2.Key([]byte(r.Spec.Password), []byte("rocketbelt"), 4096, 32, sha1.New))
 	}
 }
 

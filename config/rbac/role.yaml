@@ -9,6 +9,58 @@ rules:
 - apiGroups:
   - rocketbelt.hextech.com
   resources:
+  - hexrolebindings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rocketbelt.hextech.com
+  resources:
+  - hexrolebindings/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - rocketbelt.hextech.com
+  resources:
+  - hexrolebindings/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - rocketbelt.hextech.com
+  resources:
+  - hexroles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rocketbelt.hextech.com
+  resources:
+  - hexroles/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - rocketbelt.hextech.com
+  resources:
+  - hexroles/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - rocketbelt.hextech.com
+  resources:
   - users
   verbs:
   - create

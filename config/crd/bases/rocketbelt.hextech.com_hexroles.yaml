@@ -6,20 +6,20 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.4.1
   creationTimestamp: null
-  name: users.rocketbelt.hextech.com
+  name: hexroles.rocketbelt.hextech.com
 spec:
   group: rocketbelt.hextech.com
   names:
-    kind: User
-    listKind: UserList
-    plural: users
-    singular: user
-  scope: Cluster
+    kind: HexRole
+    listKind: HexRoleList
+    plural: hexroles
+    singular: hexrole
+  scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: User is the Schema for the users API
+        description: HexRole is the Schema for the hexroles API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -34,41 +34,27 @@ spec:
           metadata:
             type: object
           spec:
-            description: UserSpec defines the desired state of User
+            description: HexRoleSpec defines the desired state of HexRole
             properties:
-              displayName:
+              rules:
                 description: 'INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
                   Important: Run "make" to regenerate code after modifying this file'
-                type: string
-              email:
-                pattern: ^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$
-                type: string
-              foo:
-                description: Foo is an example field of User. Edit user_types.go to
-                  remove/update
-                type: string
-              im:
-                type: string
-              password:
-                type: string
-              phone:
-                pattern: '[0-9]{11}'
-                type: string
-            type: object
-          status:
-            description: UserStatus defines the observed state of User
-            properties:
-              state:
-                description: 'INSERT ADDITIONAL STATUS FIELD - define observed state
-                  of cluster Important: Run "make" to regenerate code after modifying
-                  this file'
-                type: string
+                items:
+                  properties:
+                    resources:
+                      items:
+                        type: string
+                      type: array
+                    verbs:
+                      items:
+                        type: string
+                      type: array
+                  type: object
+                type: array
             type: object
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
 status:
   acceptedNames:
     kind: ""

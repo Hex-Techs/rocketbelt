@@ -1,0 +1,7 @@
+apiVersion: rocketbelt.hextech.com/v1alpha1
+kind: HexRole
+metadata:
+  name: hexrole-sample
+spec:
+  # Add fields here
+  foo: bar

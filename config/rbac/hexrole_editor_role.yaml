@@ -1,0 +1,24 @@
+# permissions for end users to edit hexroles.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hexrole-editor-role
+rules:
+- apiGroups:
+  - rocketbelt.hextech.com
+  resources:
+  - hexroles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rocketbelt.hextech.com
+  resources:
+  - hexroles/status
+  verbs:
+  - get

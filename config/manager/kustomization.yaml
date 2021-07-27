@@ -5,7 +5,6 @@ generatorOptions:
   disableNameSuffixHash: true
 
 configMapGenerator:
-<<<<<<< HEAD
 - files:
   - controller_manager_config.yaml
   name: manager-config
@@ -15,8 +14,3 @@ images:
 - name: controller
   newName: controller
   newTag: latest
-=======
-- name: manager-config
-  files:
-  - controller_manager_config.yaml
->>>>>>> 545ed5ba5625a4569630c039b5a6efd00a15c807
