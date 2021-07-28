@@ -42,6 +42,8 @@ type RoleRef struct {
 // Important: Run "make" to regenerate code after modifying this file
 // }
 
+// +genclient
+// +genclient:nonNamespaced
 //+kubebuilder:object:root=true
 
 // HexRoleBinding is the Schema for the hexrolebindings API

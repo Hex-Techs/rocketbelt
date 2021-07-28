@@ -12,8 +12,9 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
-
-./bin/*
-./testbin/*
-./.tmp/*
+vendor/*
+.vscode/*
+.tmp/*
+.idea/*
+bin/*
+testbin/*

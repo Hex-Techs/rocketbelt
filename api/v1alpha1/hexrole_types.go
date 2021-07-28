@@ -51,6 +51,8 @@ type Rules struct {
 // Important: Run "make" to regenerate code after modifying this file
 // }
 
+// +genclient
+// +genclient:nonNamespaced
 //+kubebuilder:object:root=true
 
 // HexRole is the Schema for the hexroles API
