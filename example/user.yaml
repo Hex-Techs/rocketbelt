@@ -7,3 +7,15 @@ spec:
   email: test@tencent.com
   phone: "11111111111"
   password: "123123"
+
+---
+
+apiVersion: rocketbelt.hextech.com/v1alpha1
+kind: User
+metadata:
+  name: admin
+spec:
+  displayName: admin
+  email: admin@tencent.com
+  phone: "11111111111"
+  password: "admin"

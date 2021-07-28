@@ -18,6 +18,7 @@ package v1alpha1
 
 import (
 	"crypto/sha1"
+	"crypto/subtle"
 	"errors"
 	"fmt"
 
@@ -47,8 +48,7 @@ var _ webhook.Defaulter = &User{}
 func (r *User) Default() {
 	userlog.Info("default", "name", r.Name)
 	if r.Spec.Password != "" {
-		r.Spec.Password = fmt.Sprintf("%x",
-			pbkdf2.Key([]byte(r.Spec.Password), []byte("rocketbelt"), 4096, 32, sha1.New))
+		r.Spec.Password = Generate(r.Spec.Password)
 	}
 }
 
@@ -86,4 +86,13 @@ func (r *User) validateUser() error {
 		return errors.New("password can not empty")
 	}
 	return nil
+}
+
+func Generate(p string) string {
+	return fmt.Sprintf("%x",
+		pbkdf2.Key([]byte(p), []byte("rocketbelt"), 4096, 32, sha1.New))
+}
+
+func Validate(p1, p2 string) bool {
+	return subtle.ConstantTimeCompare([]byte(p1), []byte(p2)) == 1
 }
